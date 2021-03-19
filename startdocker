@@ -12,7 +12,7 @@ docker run \
 	\
 	--volume /Users/rainer/R/dockerlib:/opt/R/library \
 	--env R_LIBS=/opt/R/library \
-	--volume ./rsession.conf:/etc/rstudio/rsession.conf \
+	--volume $(pwd)/rsession.conf:/etc/rstudio/rsession.conf \
 	\
 	--volume /Users/rainer/R/rstudio:/home/rstudio/ \
 	--volume /Users/rainer/Documents:/home/rstudio/Documents \
