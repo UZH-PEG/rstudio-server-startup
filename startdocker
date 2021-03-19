@@ -1,0 +1,18 @@
+#!/bin/sh
+docker run \
+	--interactive \
+	--tty \
+	--rm \
+	--cpus=3 \
+	--memory=50GB \
+	--memory-swap=-1 \
+	--volume /Users/rainer/R/dockerlib:/opt/R/library \
+	--volume /Users/rainer/R/rsession.conf:/etc/rstudio/rsession.conf \
+	--publish 8787:8787 \
+	--env PASSWORD=password \
+	--env ROOT=true \
+	-v /Users/rainer/R/rstudio:/home/rstudio/ \
+	--env R_LIBS=/opt/R/library \
+	-v /Users/rainer/Documents:/home/rstudio/Documents \
+	-v /Users/rainer/git:/home/rstudio/git \
+	rocker/rstudio
