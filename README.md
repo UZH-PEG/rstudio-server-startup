@@ -1,9 +1,10 @@
 RStudio server
 =============
 
-This repo contains files to start an instance of a RStudio server including setting up an additional R library.
+This repo contains files related to creating, and running an RStudio server in different environments. It includes files and instructuions for the following environments:
 
-It contains at the moment the following files:
 
-- **`startdocker`**: the command to start the docker image
-- **`rsession.conf`**: configuration file for thr Rstudio Server. See [RStudio Documentation](https://docs.rstudio.com/ide/server-pro/r-sessions.html#package-installation)
+- **docker**
+	- **`startdocker`**: the command to start the docker image
+	- **`rsession.conf`**: configuration file for the Rstudio Server. See [RStudio Documentation](https://docs.rstudio.com/ide/server-pro/r-sessions.html#package-installation)
+- **ubuntu** server with basic ubuntu installation
