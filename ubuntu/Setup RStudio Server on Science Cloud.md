@@ -31,7 +31,13 @@ sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_
 
 ## Install R
 ```
-sudo apt install r-base
+sudo apt install \
+r-base \
+r-base-dev \
+liblapack-dev \
+liblapack3 \
+libopenblas-base \
+libopenblas-dev  
 ```
 
 # Install build tools to compile packages
@@ -55,19 +61,32 @@ sudo gdebi rstudio-server-2021.09.1-372-amd64.deb
 ```
 add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 sudo apt install \
-r-cran-tidyverse \
-r-cran-devtools \
+r-cran-data.table \ 
 r-cran-desolve \
-r-cran-nonlineartseries \
+r-cran-devtools \
+r-cran-doparallel \ 
 r-cran-earlywarnings \
-r-cran-rootsolve \
+r-cran-foreach \ 
+r-cran-ggpubr \ 
+r-cran-ggtext \ 
 r-cran-here \
-r-cran-patchwork \
-r-cran-rcppparallel \
-r-cran-rapiserialize \
-r-cran-stringfish \
+r-cran-kableextra \ 
+r-cran-lme4 \ 
+r-cran-lmertest \ 
+r-cran-marss \ 
+r-cran-nonlineartseries \
+r-cran-patchwork \ 
+r-cran-pracma \ 
 r-cran-qs \
-r-cran-rmarkdown
+r-cran-rapiserialize \
+r-cran-rcolorbrewer \ 
+r-cran-rcppparallel \
+r-cran-rmarkdown \
+r-cran-rootsolve \
+r-cran-stringfish \
+r-cran-tidyverse \
+r-cran-shiny \
+r-cran-ggfortify
 ```
 
 # Create Volume
@@ -166,7 +185,7 @@ The UUID is now `743b569b-e81f-4618-ad79-86f59c80ffda`.
 Now put the fiollowing line at the end of the file /etc/fstab` by using any editor you prefer ( nano is pre-installed and probably the easiest):
 
 ```
-UUID=<UUID> /home_rstudio ext4 rw,user,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
+UUID=<UUID> /home_rstudio ext4 rw,exec,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
 ```
 
 where you replace `<UUID>` with the uuid identified above.
