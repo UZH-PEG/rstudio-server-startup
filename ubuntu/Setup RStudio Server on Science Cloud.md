@@ -13,6 +13,7 @@ sudo apt-get install zile
 ````
 
 # Install newest R version 
+
 [http://cran.rstudio.com/bin/linux/ubuntu/](http://cran.rstudio.com/bin/linux/ubuntu/)
 
 ## Preparations
@@ -92,10 +93,15 @@ r-cran-ggfortify
 
 # Create Volume
 [https://docs.s3it.uzh.ch/cloud/user_guide/4_create_and_manage_volumes/](https://docs.s3it.uzh.ch/cloud/user_guide/4_create_and_manage_volumes/)
-Create the volume or use an existing volume and attach it to the instance
+
+Due to the small standard volume size included in the science cloud instance, it is necessary to create a new volume and to use that one as the storage for user data.
+
+See [https://docs.s3it.uzh.ch/cloud/user_guide/4_create_and_manage_volumes/](https://docs.s3it.uzh.ch/cloud/user_guide/4_create_and_manage_volumes/) for details.
+
+Create the volume or use an existing volume and attach it to the instance.
 
 ## format volume
-This should ponly be done when using a new and emplty volume. 
+This must only be done when using a new and emplty volume. 
 
 **If it is done on an existing volume with data, all data will be deleted!**
 
@@ -123,6 +129,7 @@ vdb     252:16   0   50G  0 disk
 ```
 
 In this example, the drive is `/dev/vdb/` and format it by using the following command. **Make sure that you select the right device as you can not undo this action!**
+
 ```
  sudo mkfs.ext4 -L RStudio_home /dev/vdb
 ```
@@ -144,7 +151,7 @@ In this example, the drive is `/dev/vdb/` and format it by using the following c
 It is recommended to mount it automatically upon booting as outlined at at [https://docs.s3it.uzh.ch/how-to_articles/how_to_automatically_mount_a_volume_at_instance_startup/](https://docs.s3it.uzh.ch/how-to_articles/how_to_automatically_mount_a_volume_at_instance_startup/)
 
 
-Create a directory to which the volume should be mounted
+Create a directory to which the volume should be mounted. The file `NOT_MOUNTED` will be not visible when the volume is mounted. Therefore, it is a nice reminder, that the volume is not mounted.
 
 ```
 sudo mkdir /home_rstudio
@@ -162,7 +169,7 @@ use
 sudo lsblk -o NAME,FSTYPE,UUID,SIZE,LABEL
 ```
 
-to obtain the UUID of the volume. It is for examplke:
+to obtain the UUID of the volume. It is for example:
 
 ```
 NAME    FSTYPE   UUID                                  SIZE LABEL
@@ -183,7 +190,7 @@ vdb     ext4     743b569b-e81f-4618-ad79-86f59c80ffda  700G RStudio_home
 
 The UUID is now `743b569b-e81f-4618-ad79-86f59c80ffda`.
 
-Now put the fiollowing line at the end of the file /etc/fstab` by using any editor you prefer ( nano is pre-installed and probably the easiest):
+Now put the fiollowing line at the end of the file /etc/fstab` by using any editor you prefer (nano is pre-installed and probably the easiest):
 
 ```
 UUID=<UUID> /home_rstudio ext4 rw,exec,noauto,x-systemd.automount,x-systemd.idle-timeout=300 0 0
@@ -191,11 +198,12 @@ UUID=<UUID> /home_rstudio ext4 rw,exec,noauto,x-systemd.automount,x-systemd.idle
 
 where you replace `<UUID>` with the uuid identified above.
 
-Important: At the end of the line you have to press return, i.e. the last line of the file needs to be an empty line!
+Important: **At the end of the line you have to press return, i.e. the last line of the file needs to be an empty line!**
 
 
 # Create snapshot of the instance
-Now you are all set and should create a snapshot of the image.
+Now you are all set and should create a snapshot of the instance from the SeIT Science Cloud web interface.
+
 
 # Install SAMBA server and share home directories
 TODO
@@ -209,7 +217,13 @@ sudo apt install samba
 and setup samba to share all user directories by following this manual at [https://www.howtogeek.com/howto/ubuntu/share-ubuntu-home-directories-using-samba/](https://www.howtogeek.com/howto/ubuntu/share-ubuntu-home-directories-using-samba/)
 
 
-# Add User
+# Management of the RStudio server
+
+## User management
+
+'RStudio usese system users as the users of the system, SAMBA a separate user database.
+
+### Add User for RStudio server and Samba
 
 ```
 sudo useradd -m -d /home_rstudio/NAME NAME
@@ -218,3 +232,15 @@ sudo passwd NAME PASSWORD
 
 sudo smbpasswd -a NAME
 ```
+
+## RStudio Job Management
+
+Info on this can be found [https://support.posit.co/hc/en-us/articles/200532327-Managing-RStudio-Workbench-RStudio-Server](https://support.posit.co/hc/en-us/articles/200532327-Managing-RStudio-Workbench-RStudio-Server).
+
+Examples are:
+- `sudo rstudio-server active-sessions` lists all rstudio sessions by all users
+- `sudo rstudio-server kill-session 599936` kill an rstudio session. More than one id can be specified.
+ 
+Other useful commands:
+- `ps -u USER` show all processes of the user USER
+- `sudo kill PID` kill all processes of a user
