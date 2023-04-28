@@ -11,7 +11,7 @@ docker run \
 	--env ROOT=true \
 	\
 	--env R_LIBS=/opt/R/library \
-  --volume /path/to/host/user/library:/opt/R/library
+  --volume /path/to/host/user/library:/opt/R/library \
 	\
 	--volume /Users/rainer/R/rstudio:/home/rstudio/ \
 	--volume /Users/rainer/Documents:/home/rstudio/Documents \
