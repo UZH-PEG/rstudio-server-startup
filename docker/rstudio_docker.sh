@@ -11,14 +11,13 @@ docker run \
 	--env ROOT=true \
 	\
 	--env R_LIBS=/opt/R/library \
-	--volume $(pwd)/rsession.conf:/etc/rstudio/rsession.conf \
+  --volume /path/to/host/user/library:/opt/R/library
 	\
 	--volume /Users/rainer/R/rstudio:/home/rstudio/ \
 	--volume /Users/rainer/Documents:/home/rstudio/Documents \
 	--volume /Users/rainer/git:/home/rstudio/git \
 	rocker/verse:4.2.3
 	
-# 	--volume /Users/rainer/R/dockerlib:/opt/R/library \
 
 
 	
