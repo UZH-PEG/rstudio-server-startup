@@ -10,7 +10,6 @@ docker run \
 	--env PASSWORD=password \
 	--env ROOT=true \
 	\
-	--volume /Users/rainer/R/dockerlib:/opt/R/library \
 	--env R_LIBS=/opt/R/library \
 	--volume $(pwd)/rsession.conf:/etc/rstudio/rsession.conf \
 	\
@@ -19,6 +18,9 @@ docker run \
 	--volume /Users/rainer/git:/home/rstudio/git \
 	rocker/verse:4.2.3
 	
+# 	--volume /Users/rainer/R/dockerlib:/opt/R/library \
+
+
 	
 #!/bin/bash
 # docker run -ti  \
