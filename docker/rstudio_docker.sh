@@ -10,8 +10,9 @@ docker run \
 	--env PASSWORD=password \
 	--env ROOT=true \
 	\
+	--volume $(pwd)/rsession.conf:/etc/rstudio/rsession.conf \
 	--env R_LIBS=/opt/R/library \
-  --volume /Users/rainer/R/library/docker/4.2.3:/opt/R/library \
+	--volume /Users/rainer/R/library/docker/4.2.3:/opt/R/library \
 	\
 	--volume /Users/rainer/R/rstudio:/home/rstudio/ \
 	--volume /Users/rainer/Documents:/home/rstudio/Documents \
