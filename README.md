@@ -1,7 +1,7 @@
 RStudio server
 =============
 
-This repo contains files related to creating, and running an RStudio server in different environments. It includes files and instructuions for the following environments:
+This repository contains files related to creating, and running an RStudio server in different environments. It includes files and instructuions for the following environments:
 
 
 - **docker**
